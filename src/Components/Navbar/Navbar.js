@@ -13,7 +13,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import {Link} from 'react-router-dom';
 import {buttonStyles, boxStyles} from './styles';
 
-const pages = ['Home', 'Services', 'Contact'];
+const pages = ['home', 'services', 'contact'];
 
 
 const ResponsiveAppBar = () => {
@@ -28,7 +28,7 @@ const ResponsiveAppBar = () => {
   };
   
   const setRoute = (page) =>{
-    let route = (page === "Home"? "/":"/"+page)
+    let route = (page === "home"? "/":"/"+page)
     return route
   }
   

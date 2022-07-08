@@ -1,7 +1,8 @@
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { CustomForm } from "./CustomForm/CustomForm";
-import { formStyles, customFormContainer } from "./styles"
+import { formStyles, customFormContainer } from "./styles";
+import axios from 'axios';
 
 
 const inputFieldValues = [
@@ -40,14 +41,33 @@ const ContactForm = () => {
     const [errors, setErrors] = useState({});
 
 
-    const PostContactForm = async (values, successCallback, errorCallback
-        ) => {
-          // do stuff
-          // if successful
-          if (true) successCallback();
-          else errorCallback();
-        };
-        
+    const sendContactForm = () =>{
+        axios({
+            method: "POST",
+            url:"http://localhost:5000/contact/send",
+            data: {
+            name: values.fullName,
+            email: values.email,
+            messageHtml: values.message
+            }})
+            .then((response)=>{
+                if (response.data.msg === 'success'){
+                    alert("Email sent, awesome!");
+                    resetForm();
+                }else if(response.data.msg === 'fail'){
+                    alert("Oops, something went wrong. Try again");
+                    sendAlert();
+                   
+            }})
+    }
+
+    const resetForm = () =>{
+
+    }
+
+    const sendAlert = () =>{
+
+    }
     const validate = (fieldValues = values) => {
         let temp = { ...errors };
 
@@ -75,32 +95,51 @@ const ContactForm = () => {
     
     const handleInputValue = (e) => {
         const { name, value } = e.target;
-        setValues({
-            ...values,
-            name: value
-        });
+        console.log(`Name in handleInputValue ${name}`)
+        switch(name) {
+          case 'fullName':
+            setValues({
+              ...values,
+              'fullName':value
+            });
+            break;
+          case 'email':
+            setValues({
+              ...values,
+              'email':value
+            });
+            break;
+          case 'message':
+            setValues({
+              ...values,
+              'message':value
+            });
+            break;
+        }
+        
         validate({ name: value });
+        console.log(values)
     };
     
     
     
-    const handleSuccess = () => {
-        setValues({
-            ...initialFormValues,
-            formSubmitted: true,
-            success: true
-        });
-    };
+    // const handleSuccess = () => {
+    //     setValues({
+    //         ...initialFormValues,
+    //         formSubmitted: true,
+    //         success: true
+    //     });
+    // };
     
     
     
-    const handleError = () => {
-        setValues({
-            ...initialFormValues,
-            formSubmitted: true,
-            success: false
-        });
-    };
+    // const handleError = () => {
+    //     setValues({
+    //         ...initialFormValues,
+    //         formSubmitted: true,
+    //         success: false
+    //     });
+    // };
     
     
     
@@ -123,7 +162,7 @@ const ContactForm = () => {
         const isValid =
             Object.values(errors).every((x) => x === "") && formIsValid();
         if (isValid) {
-            await PostContactForm(values, handleSuccess, handleError);
+            sendContactForm();
         }
     };
 

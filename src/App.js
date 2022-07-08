@@ -1,6 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
-import {Route, BrowserRouter as Router, Routes, Link} from 'react-router-dom';
+import {Route, BrowserRouter as Router, Routes} from 'react-router-dom';
 import Home from './Containers/Home/Home';
 // import Services from './Containers/Services/Services';
 import Contact from './Containers/Contact/Contact';
@@ -11,8 +10,8 @@ function App() {
       <Router>
         <Navbar/>
         <Routes>
-          {/* <Route exact path = "/Services" element = {Services}/> */}
-          <Route exact path = "/Contact" element = {<Contact/>}/>
+          {/* <Route exact path = "/services" element = {Services}/> */}
+          <Route exact path = "/contact" element = {<Contact/>}/>
           <Route path = "/" element = {<Home/>}/>
         </Routes>
 
