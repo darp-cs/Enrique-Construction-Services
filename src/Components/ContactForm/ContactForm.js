@@ -1,8 +1,8 @@
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { CustomForm } from "./CustomForm/CustomForm";
-import { formStyles, customFormContainer } from "./styles";
-import axios from 'axios';
+import { formStyles, customFormContainer, buttonStyles } from "./styles";
+import defaultInstance from '../../Utils/defaultInstance';
 
 
 const inputFieldValues = [
@@ -20,8 +20,6 @@ const inputFieldValues = [
     name: "message",
     label: "Message",
     id: "my-message",
-    multiline: true,
-    rows: 10
   }
 ];
 
@@ -40,34 +38,15 @@ const ContactForm = () => {
     const [values, setValues] = useState(initialFormValues);
     const [errors, setErrors] = useState({});
 
+    // const resetForm = () =>{
 
-    const sendContactForm = () =>{
-        axios({
-            method: "POST",
-            url:"http://localhost:5000/contact/send",
-            data: {
-            name: values.fullName,
-            email: values.email,
-            messageHtml: values.message
-            }})
-            .then((response)=>{
-                if (response.data.msg === 'success'){
-                    alert("Email sent, awesome!");
-                    resetForm();
-                }else if(response.data.msg === 'fail'){
-                    alert("Oops, something went wrong. Try again");
-                    sendAlert();
-                   
-            }})
-    }
+    // }
 
-    const resetForm = () =>{
+    // const sendAlert = () =>{
 
-    }
+    // }
 
-    const sendAlert = () =>{
-
-    }
+    
     const validate = (fieldValues = values) => {
         let temp = { ...errors };
 
@@ -159,10 +138,17 @@ const ContactForm = () => {
         
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        const isValid =
-            Object.values(errors).every((x) => x === "") && formIsValid();
+        const isValid = Object.values(errors).every((x) => x === "") && formIsValid();
+        const data = {
+          name: values.fullName,
+          email: values.email,
+          message: values.message
+          }
         if (isValid) {
-            sendContactForm();
+          const res = defaultInstance.post("contact/send",data)
+          console.log(res)
+        } else{
+          console.log('form was not valid')
         }
     };
 
@@ -173,15 +159,17 @@ const ContactForm = () => {
           return (
             <TextField
               key={index}
-              className={formStyles.textField}
+              sx={formStyles(inputFieldValue)}
               onChange={handleInputValue}
               onBlur={handleInputValue}
               name={inputFieldValue.name}
               label={inputFieldValue.label}
               error={errors[inputFieldValue.name]}
-              multiline={inputFieldValue.multiline ?? false}
+              multiline
               fullWidth
-              rows={inputFieldValue.rows ?? 1}
+              rows={2}
+              maxRows={Infinity}
+              variant='standard'
               autoComplete="none"
               {...(errors[inputFieldValue.name] && {
                 error: true,
@@ -194,6 +182,7 @@ const ContactForm = () => {
           variant="contained"
           type="submit"
           color="secondary"
+          sx = {buttonStyles}
           disabled={!formIsValid()}
         >
           Send Message

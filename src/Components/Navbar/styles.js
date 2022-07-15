@@ -1,4 +1,5 @@
 //Styles used by MUI components
+import logoImage from '../../Images/StuccoStoneConstructionCopy.png'
 
 
 
@@ -7,15 +8,33 @@ export const buttonStyles = {
     color: 'white',
     display: 'block',
     '&:hover':{
-        background: "rgba(0, 0, 0, 0.87)"
-    }
+        background: "#a15120"
+    },
+   
 }
 
 export const boxStyles = {
     flexGrow: 1, 
     display: { xs: 'none', md: 'flex' },
-    background:"#1976d2",
+    justifyContent:'right',
+    //brown color
+    background:"#bc6630",
     
 }
 
+export const logoStyles = {
+    mr: 2,
+    display: { xs: 'none', md: 'flex' },
+    color: 'inherit',
+    textDecoration: 'none',
+    background:{logoImage},
+    fontSize:'small',
+    // fontFamily: 'monospace',
+}
+
 // "color: rgba(0, 0, 0, 0.87)"
+
+export const navBarStyles = {
+    backgroundColor:'#bc6630'
+}
+
