@@ -1,8 +1,8 @@
 export const customFormContainer = {
-    width: "100%",
+    width: "65%",
     display:"flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
 }
 
 export const buttonStyles = {

@@ -4,6 +4,7 @@ export const formStyles = {
     paddingLeft:"6px",
     paddingRight:"6px",
     borderRadius: "3px 3px 3px 3px",
-    paddingBottom: "10px",
-    paddingTop:"10px"
+    paddingBottom: "50px",
+    paddingTop:"50px",
+    float:"right"
 }
