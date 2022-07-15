@@ -27,7 +27,6 @@ export const logoStyles = {
     display: { xs: 'none', md: 'flex' },
     color: 'inherit',
     textDecoration: 'none',
-    background:{logoImage},
     fontSize:'small',
     // fontFamily: 'monospace',
 }

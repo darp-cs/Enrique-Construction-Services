@@ -12,6 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import {Link} from 'react-router-dom';
 import {buttonStyles, boxStyles, logoStyles, navBarStyles} from './styles';
+import Logo from './Logo/Logo'
 
 const pages = ['home', 'services', 'contact'];
 
@@ -39,15 +40,12 @@ const ResponsiveAppBar = () => {
     <AppBar position="static" sx = {navBarStyles}>
       <Container maxWidth="xl">
         <Toolbar disableGutters >
-          <Typography
-            variant="h6"
-            component="a"
+          <IconButton
             href="/"
             sx={logoStyles}
           >
-            {/* <Logo/> */}
-          STUCCO STONE CONSTRUCTION
-          </Typography>
+            Stucco Stone Construction
+          </IconButton>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
