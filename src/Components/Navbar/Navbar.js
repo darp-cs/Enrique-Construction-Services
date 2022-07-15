@@ -11,7 +11,8 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import {Link} from 'react-router-dom';
-import {buttonStyles, boxStyles} from './styles';
+import {buttonStyles, boxStyles, logoStyles, navBarStyles} from './styles';
+import Logo from './Logo/Logo'
 
 const pages = ['home', 'services', 'contact'];
 
@@ -36,27 +37,15 @@ const ResponsiveAppBar = () => {
 
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx = {navBarStyles}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
+        <Toolbar disableGutters >
+          <IconButton
             href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
+            sx={logoStyles}
           >
-            LOGO
-          </Typography>
+            Stucco Stone Construction
+          </IconButton>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -89,7 +78,7 @@ const ResponsiveAppBar = () => {
             >
               {pages.map((page) => (
                 <Link key ={page} to = {setRoute(page)} style={{ textDecoration: 'none' }}>
-                    <MenuItem onClick={handleCloseNavMenu}>
+                    <MenuItem  onClick={handleCloseNavMenu}>
                         <Typography textAlign="center">{page}</Typography>
                     </MenuItem>
                 </Link>

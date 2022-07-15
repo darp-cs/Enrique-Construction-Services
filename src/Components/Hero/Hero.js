@@ -11,7 +11,7 @@ import {buttonStyles} from './styles';
 const Hero = () =>{
     return (
         <div>
-            <LazyHero imageSrc={heroImg} opacity='.4'>
+            <LazyHero imageSrc={heroImg} opacity={.4}>
                 <Button sx={buttonStyles} component={Link} to="/Services" variant="contained" color="primary">
                     Services
                 </Button>
